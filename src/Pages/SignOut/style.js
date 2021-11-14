@@ -38,6 +38,12 @@ export const Modal = styled.div`
         box-shadow: 2px 2px 16px rgba(0,0,0,24%);
         transition: 0.3s ease-in;
     }
+
+
+    @media (max-width: 728px){
+        width: 260px;
+        height: 420px;
+    }
 `;
 
 export const Wrap = styled.div`
@@ -121,5 +127,9 @@ export const Input = styled.input`
         background: #fff;
         cursor: pointer;
         box-shadow: 3px 3px 3px rgba(0,0,0,3%);
+    }
+
+    @media (max-width: 728px){
+        width: 220px;
     }
 `;

@@ -17,6 +17,14 @@ export default function SignOut() {
         }
     }
 
+    async function handleTouch() {
+        try{
+            const rows = await CreateUser({ name, email, password });
+        }catch(e){
+            alert(e)
+        }
+    }
+
     return (
         <section id="sign-out">
             <Container>
@@ -49,7 +57,7 @@ export default function SignOut() {
                             />
                         </div>
                     </Wrap>
-                    <Button onClick={handleClick}>Enviar</Button>
+                    <Button onClick={handleClick} onTouchStart={handleTouch}>Enviar</Button>
                 </Modal>
             </Container>
         </section>

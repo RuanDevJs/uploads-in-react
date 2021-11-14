@@ -5,6 +5,7 @@ import svg from "../../assets/Ace.svg";
 import Button from "../../Components/Button";
 import { UserContext } from "../../Contexts/UserContext";
 import firebase from "../../services/firebase";
+import LoadingCircle from "../../Components/Loading";
 
 export default function Home() {
     const { ChangeImageProfile, LogOut } = useContext(UserContext);
@@ -42,7 +43,7 @@ export default function Home() {
     }, []);
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <LoadingCircle />;
     }
 
     return (
@@ -52,7 +53,7 @@ export default function Home() {
                     <Modal>
                         <Wrap>
                             <label htmlFor="file">
-                                <Image src={data.image_path} />
+                                <Image src={data.image_path} onDragStart={e => e.preventDefault()}/>
                             </label>
                             <input
                                 type="file"

@@ -22,6 +22,7 @@ export default function Button({children, ...props}) {
             background: #DB2A2D;
             transition: 0.3s ease-in;
         }
+
     `;
 
     return (

@@ -18,7 +18,7 @@ export const Modal = styled.div`
     height: 420px;
     width: 420px;
     background: #ffffff;
-    border-radius: 4px;
+    border-radius: 50px;
     box-shadow: 2px 2px 16px rgba(0,0,0,16%);
     transition: 0.3s ease-out;
     cursor: pointer;
@@ -26,6 +26,11 @@ export const Modal = styled.div`
     &:hover {
         box-shadow: 2px 2px 16px rgba(0,0,0,24%);
         transition: 0.3s ease-in;
+    }
+
+    @media (max-width: 728px){
+        width: 260px;
+        border-radius: 50px;
     }
 `;
 
@@ -42,8 +47,9 @@ export const Image = styled.img`
     display: block;
     width: 160px;
     height: 160px;
-    padding: 5px 0 20px 0;
-    border-radius: 50%;
+    border-radius: 50px;
+    margin: 5px 0 20px 0;
+    box-shadow: 3px 3px 16px rgba(0,0,0,16%);
 `;
 
 export const Subtitle = styled.p`
@@ -53,6 +59,11 @@ export const Subtitle = styled.p`
     text-align: center;
     align-self: center;
     margin: 0 auto;
+
+
+    @media (max-width: 728px){
+        font-size: 14px;
+    }
 `;
 
 export const Title = styled.h2`
@@ -68,5 +79,9 @@ export const Title = styled.h2`
     &:hover {
         color: #222;
         transition: 0.3s ease-in;
+    }
+
+    @media (max-width: 728px){
+        font-size: 22px;
     }
 `;
