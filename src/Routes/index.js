@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { UserContext } from "../Contexts/UserContext";
+import { AuthenticateContext } from "../Contexts/AuthenticateContext";
 
 import Home from "../Pages/Home";
+import SignIn from "../Pages/SignIn";
 import SignOut from "../Pages/SignOut";
 
 function CustomRoutes({isPrivate, ...props}){
-    const {loading, authenticated} = useContext(UserContext);
+    const {authenticated, loading} = useContext(AuthenticateContext);
 
     if(loading){
         return(
@@ -29,7 +30,8 @@ function CustomRoutes({isPrivate, ...props}){
 export default function Routes() {
     return (
         <Switch>
-            <CustomRoutes exact path="/" component={SignOut} />
+            <CustomRoutes exact path="/" component={SignIn} />
+            <CustomRoutes exact path="/register" component={SignOut} />
             <CustomRoutes isPrivate exact path="/home" component={Home} />
         </Switch>
     );

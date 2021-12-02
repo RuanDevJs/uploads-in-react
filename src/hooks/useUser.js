@@ -1,72 +1,30 @@
 import React, { useEffect, useState } from "react";
-import {useHistory} from "react-router-dom";
 import axios from "../services/axios";
 
-export default function useUser(){
-    const [authenticated, setAuthenticated] = useState(false);
+export default function useUser(_id) {
     const [loading, setLoading] = useState(true);
-    const history = useHistory();
+    const [id, setId] = useState(_id);
+
+    const [dataUser, setDataUser] = useState(null);
+    const [response, setResponse] = useState(null);
 
     useEffect(() => {
-        const id = localStorage.getItem("id");
-        if(id){
-            setAuthenticated(true);
-        }
-        setLoading(false);
-    }, []);
+        (async () => {
+            if (id) {
+                try {
+                    const rows = await axios.get(`/user/${id}`);
+                    setDataUser(rows.data);
+                    setResponse({ status: rows.status });
+                    setLoading(false);
+                } catch (e) {
+                    setLoading(false);
+                }
+            } else {
+                setResponse({ status: 400, msg: "User not found" });
+                setLoading(false);
+            }
+        })();
+    }, [id]);
 
-    async function Login({email, senha}){
-        try{
-            const rows = await (await axios.post('/login',{
-                email: email,
-                senha: senha
-            })).data;
-            return {status: 200, rows};
-        }catch(e){
-            return e;
-        }
-    }
-
-    async function GetUserById(id){
-        try{
-            const rows = await (await axios.get(`user/${id}`)).data;
-            return {status: 200, rows};
-        }catch(e){
-            return e;
-        }
-    }
-
-    async function ChangeImageProfile(id, path){
-        try{
-            const rows = await (await axios.put(`user/${id}`, {
-                image_path: path
-            })).data
-            return {status: 200, rows};
-        }catch(e){
-            return e;
-        }
-    }
-
-    async function CreateUser({name, email, senha}){
-        try{
-            const rows = await (await axios.post('/user',{
-                name: name,
-                email: email,
-                senha: senha
-            })).data;
-            setLoading(false);
-            localStorage.setItem("id", rows._id);
-            setAuthenticated(true);
-            history.push("/home");
-        }catch(e){
-            return e;
-        }
-    }
-
-    async function LogOut(){
-        localStorage.removeItem("id");
-        setAuthenticated(false);
-    }
-
-    return {Login, GetUserById, ChangeImageProfile, CreateUser, LogOut, loading, authenticated}
+    return { dataUser, setDataUser, loading, setLoading, response };
 }

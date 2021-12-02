@@ -5,15 +5,14 @@ import Button from "../../Components/Button";
 import { AuthenticateContext } from "../../Contexts/AuthenticateContext";
 import { Container, Input, Label, Modal, Title, Wrap } from "./style";
 
-export default function SignOut() {
-    const { SignOut } = useContext(AuthenticateContext);
-    const [name, setName] = useState(null);
+export default function SignIn() {
+    const { SignIn } = useContext(AuthenticateContext);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
     async function handleClick() {
         try{
-            const rows = await SignOut({ name, email, password });
+            const rows = await SignIn({ email, password });
         }catch(e){
             alert(e)
         }
@@ -21,26 +20,17 @@ export default function SignOut() {
 
     async function handleTouch() {
         try{
-            const rows = await SignOut({ name, email, password });
+            const rows = await SignIn({ email, password });
         }catch(e){
             alert(e)
         }
     }
 
     return (
-        <section id="sign-out">
+        <section id="sign-in">
             <Container>
                 <Modal>
-                    <Title>Cadastro</Title>
-                    <Wrap>
-                        <div>
-                            <Label>Nome</Label>
-                            <Input
-                                type="text"
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                    </Wrap>
+                    <Title>Login</Title>
                     <Wrap>
                         <div>
                             <Label>Email</Label>
@@ -60,7 +50,7 @@ export default function SignOut() {
                         </div>
                     </Wrap>
                     <Button onClick={handleClick} onTouchStart={handleTouch}>Enviar</Button>
-                    <Link to="/">Login</Link>
+                    <Link to="/register">Cadastrar</Link>
                 </Modal>
             </Container>
         </section>

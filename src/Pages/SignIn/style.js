@@ -22,7 +22,6 @@ export const Container = styled.div`
         justify-content: center;
     }
 
-
     a{
         border-radius: 4px;
         margin: 20px auto;
